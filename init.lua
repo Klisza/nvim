@@ -67,6 +67,16 @@ vim.o.splitbelow = true
 vim.o.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'c', 'h' },
+  callback = function()
+    vim.opt_local.tabstop = 8
+    vim.opt_local.shiftwidth = 8
+    vim.opt_local.softtabstop = 8
+    vim.opt_local.expandtab = false
+  end,
+})
+
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
 
@@ -647,7 +657,7 @@ require('lazy').setup({
             '--background-index',
             '--clang-tidy',
             '--enable-config', -- <-- read .clangd / config.yaml
-            '--query-driver=/sbin/riscv64-linux-gnu-*', -- <-- allow your RISC-V gcc
+            --'--query-driver=/sbin/riscv64-linux-gnu-*', -- <-- allow your RISC-V gcc
           },
         },
         -- gopls = {},
@@ -855,22 +865,22 @@ require('lazy').setup({
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        transparent = true,
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-          sidebars = 'transparent',
-          floats = 'transparent',
-        },
-      }
+      -- require('tokyonight').setup {
+      --   transparent = true,
+      --   styles = {
+      --     comments = { italic = false }, -- Disable italics in comments
+      --     sidebars = 'transparent',
+      --     floats = 'transparent',
+      --   },
+      -- }
 
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
-      vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
-      vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
-      vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
+      -- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+      -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+      -- vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
     end,
   },
 
